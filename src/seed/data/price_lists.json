@@ -1,0 +1,12 @@
+[
+  {
+    "reference": "price_list_1",
+    "name": "EUR Price List",
+    "currency_code": "EUR"
+  },
+  {
+    "reference": "price_list_3",
+    "name": "GBP Price List",
+    "currency_code": "GBP"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "reference": "shipping_method_1",
+    "market": "market_1",
+    "shipping_zone": "shipping_zone_1",
+    "shipping_category": "shipping_category_1",
+    "name": "Standard Shipping",
+    "price_amount_cents": 700,
+    "free_over_amount_cents": 9900
+  },
+  {
+    "reference": "shipping_method_2",
+    "market": "market_1",
+    "shipping_zone": "shipping_zone_1",
+    "shipping_category": "shipping_category_1",
+    "name": "Express Delivery",
+    "price_amount_cents": 1200
+  },
+  {
+    "reference": "shipping_method_4",
+    "market": "market_3",
+    "shipping_zone": "shipping_zone_1",
+    "shipping_category": "shipping_category_1",
+    "name": "Standard Shipping",
+    "price_amount_cents": 700,
+    "free_over_amount_cents": 9900
+  }
+]

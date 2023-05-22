@@ -1,0 +1,8 @@
+[
+  {
+    "reference": "inventory_stock_location_1",
+    "inventory_model": "inventory_model_1",
+    "stock_location": "stock_location_1",
+    "priority": 1
+  }
+]

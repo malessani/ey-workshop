@@ -1,0 +1,11 @@
+[
+  {
+    "reference": "shipping_zone_1",
+    "name": "European countries",
+    "country_code_regex": "IT|DE|ES|FR|ES"
+  },
+  {
+    "reference": "shipping_zone_3",
+    "name": "Worldwide"
+  }
+]

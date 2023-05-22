@@ -1,0 +1,14 @@
+[
+  {
+    "reference": "address_1",
+    "business": true,
+    "company": "The Brand SRL",
+    "line_1": "Via Roma 123",
+    "city": "Firenze",
+    "zip_code": "50123",
+    "state_code": "FI",
+    "country_code": "IT",
+    "phone": "+39 055 1234567890",
+    "email": "touch@example.com"
+  }
+]
