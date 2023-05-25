@@ -3,7 +3,7 @@ import { OrderContainer } from "@commercelayer/react-components/orders/OrderCont
 import { OrderStorage } from "@commercelayer/react-components/orders/OrderStorage";
 import { authentication } from "@commercelayer/js-auth";
 import { useEffect, useState } from "react";
-import { CartLink } from "@commercelayer/react-components";
+import { TBaseReturn } from "@commercelayer/js-auth/lib/esm/types";
 
 type Props = {
   children: JSX.Element;
@@ -50,14 +50,20 @@ function CommerceLayerAuth({ children, clientId, slug, market }: Props) {
           scope: `market:${market}`,
         });
 
-        setAccessToken(auth.accessToken);
+        const auth: Authorization = {
+          ...result,
+          expires: Date.now() + result.expiresIn * 1000,
+        };
+
+        localStorage.setItem(`authorization-${market}`, JSON.stringify(auth));
+        setAuthorization(auth);
       }
     }
 
     void run();
   }, [market]);
 
-  if (accessToken == null) {
+  if (authorization == null) {
     return null;
   }
 
@@ -65,7 +71,7 @@ function CommerceLayerAuth({ children, clientId, slug, market }: Props) {
 
   return (
     <CommerceLayer
-      accessToken={accessToken}
+      accessToken={authorization.accessToken}
       endpoint={`https://${slug}.commercelayer.io`}
     >
       <OrderStorage persistKey={`order-${market}`}>
