@@ -15,20 +15,45 @@ exports.createPages = async ({ graphql, actions }: CreatePagesArgs) => {
     }
   `);
 
+  const { data: data2 } = await graphql<Queries.GetCountryPagesQuery>(`
+    query GetCountryPages {
+      allCountriesJson {
+        nodes {
+          market
+          slug
+          name
+        }
+      }
+    }
+  `);
+
+  const listTemplate = path.resolve("./src/templates/list.tsx");
   const productTemplate = path.resolve("./src/templates/pokemon.tsx");
+  const countries = data2?.allCountriesJson.nodes;
   const pokemons = data?.allProductsJson.nodes;
 
-  (pokemons || []).forEach((pokemon) => {
-    if (!pokemon.slug) {
-      return;
-    }
-
+  (countries || []).forEach((country) => {
+    console.log(country);
     createPage({
-      path: pokemon.slug,
-      component: productTemplate,
+      path: `${country.slug}`,
+      component: listTemplate,
       context: {
-        id: pokemon.id,
+        country,
       },
+    });
+    (pokemons || []).forEach((pokemon) => {
+      if (!pokemon.slug) {
+        return;
+      }
+
+      createPage({
+        path: `${country.slug}/${pokemon.slug}`,
+        component: productTemplate,
+        context: {
+          id: pokemon.id,
+          market: country.market,
+        },
+      });
     });
   });
 };

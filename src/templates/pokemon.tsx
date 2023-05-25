@@ -7,12 +7,16 @@ import { AvailabilityContainer } from "@commercelayer/react-components/skus/Avai
 import { AvailabilityTemplate } from "@commercelayer/react-components/skus/AvailabilityTemplate";
 import { PricesContainer } from "@commercelayer/react-components/prices/PricesContainer";
 import { Price } from "@commercelayer/react-components/prices/Price";
+import { useState } from "react";
 
-const PokemonPage = ({ data }: PageProps<Queries.ProductPageQuery>) => {
+const PokemonPage = ({
+  data,
+  pageContext,
+}: PageProps<Queries.ProductPageQuery, { market: number }>) => {
   const { productsJson: product } = data;
-
+  const [available, setAvailable] = useState(false);
   return (
-    <Page title={product?.name || "Name not found"}>
+    <Page title={product?.name || "Name not found"} market={pageContext.market}>
       <p>{product?.description || "Description not found"}</p>
       <p>
         <PricesContainer>
@@ -25,12 +29,20 @@ const PokemonPage = ({ data }: PageProps<Queries.ProductPageQuery>) => {
       </p>
       <p>
         {product?.sku && (
-          <AvailabilityContainer skuCode={product?.sku}>
-            <AvailabilityTemplate className={styles.px} />
-          </AvailabilityContainer>
+          <>
+            <AvailabilityContainer
+              skuCode={product.sku}
+              getQuantity={(quantity) => setAvailable(quantity > 0)}
+            >
+              <AvailabilityTemplate className={styles.px} />
+            </AvailabilityContainer>
+            <AddToCartButton
+              quantity={"1"}
+              disabled={!available}
+              skuCode={product.sku}
+            />
+          </>
         )}
-
-        <AddToCartButton quantity={"1"} skuCode={product?.sku!} />
       </p>
     </Page>
   );
