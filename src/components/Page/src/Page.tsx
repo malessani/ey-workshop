@@ -12,15 +12,14 @@ export type PageProps = {
 
 const marketNumber = 13502;
 
-const clientId = `${process.env.CLIENT_ID}`;
-const slug = `${process.env.SLUG}`;
+const clientId = `${process.env.GATSBY_CLIENT_ID}`;
+const slug = `${process.env.GATSBY_SLUG}`;
 
 const Page = ({ children, title, market }: PageProps) => {
   return (
     <CommerceLayerAuth clientId={clientId} slug={slug} market={market ?? 13502}>
       <main className={styles.page}>
-        <Link to="/">Home</Link> | <CartLink label="Cart" />
-        <h1 className={styles.title}>{title}</h1>
+        <Link to="/">Home</Link> |<h1 className={styles.title}>{title}</h1>
         <div>{children}</div>
       </main>
     </CommerceLayerAuth>
